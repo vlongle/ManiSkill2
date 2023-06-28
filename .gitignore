@@ -17,6 +17,9 @@ dist/
 *.swp
 *~
 
+# data
+*logs
+
 # MacOS
 *.DS_Store
 
