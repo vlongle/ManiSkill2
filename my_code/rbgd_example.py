@@ -152,12 +152,14 @@ class ManiSkillRGBDWrapper(gym.ObservationWrapper):
                 rgb = rgb.to(device="cpu", non_blocking=True)
             if isinstance(depth, th.Tensor):
                 depth = depth.to(device="cpu", non_blocking=True)
-
+            # rgb.shape = [num_envs, h, w, 3]
+            # depth.shape = [num_envs, h, w, 1]
             images.append(rgb)
             images.append(depth)
 
         # Concatenate all the images
         rgbd = np.concatenate(images, axis=-1)
+        # rgbd.shape = [num_envs, h, w, (3 (rbg) +1 (depth)) * (num_cameras) ]
 
         # Concatenate all the states
         state = np.hstack(
@@ -201,6 +203,7 @@ class TrainingParams:
     rollout_steps: int = 3200  # how many steps to run to collect buffer
     # data before updating the policy (i.e. buffer size for on-policy PPO)
     num_envs: int = 24
+    # num_envs: int = 3
     seed: int = 0
     batch_size: int = 400  # minibatch size for each update taken from
     # the buffer
@@ -307,7 +310,6 @@ def eval_model(model, env_params, log_dir):
     eval_env.seed(1)
     eval_env.reset()
 
-
     returns, ep_lens = evaluate_policy(
         model, eval_env, deterministic=True, render=False, return_episode_rewards=True, n_eval_episodes=10)
     # episode length < max_episode_steps means we solved the task before time ran out
@@ -321,6 +323,10 @@ def eval_model(model, env_params, log_dir):
 parser = argparse.ArgumentParser()
 parser.add_argument('--pretrained', action='store_true',
                     help='Use pretrained model')
+parser.add_argument('--seed', type=int, default=0,
+                    help='Random seed')
+parser.add_argument('--env_id', type=str, default="LiftCube-v0",
+                    help='Environment ID')
 args = parser.parse_args()
 
 
@@ -328,6 +334,9 @@ if __name__ == "__main__":
     start = time()
 
     env_params = EnvParams()
+    env_params.env_id = args.env_id
+    env_params.seed = args.seed
+    print(f"Training on {env_params.env_id} with seed {env_params.seed}")
     training_params = TrainingParams()
     learner_params = LearnerParams()
     callback_params = CallbackParams()

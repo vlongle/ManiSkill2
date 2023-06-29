@@ -1,0 +1,22 @@
+# from https://haosulab.github.io/ManiSkill2/concepts/environments.html
+env_ids = [
+    "PickCube-v0",
+    "StackCube-v0",
+    "PickSingleYCB-v0",
+    "PickSingleEGAD-v0",
+    "PickClutterYCB-v0",
+    "PegInsertionSide-v0",
+    "PlugCharger-v0",
+    "AssemblingKits-v0",
+    "PandaAvoidObstacles-v0",
+    "TurnFaucet-v0",
+    "OpenCabinetDoor-v1",
+    "OpenCabinetDrawer-v1",
+    "PushChair-v1",
+    "MoveBucket-v1",
+    "Excavate-v0",
+    "Fill-v0",
+    "Pour-v0",
+    "Pinch-v0",
+    "Write-v0",
+]

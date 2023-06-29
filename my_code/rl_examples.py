@@ -23,7 +23,6 @@ from dataclasses import asdict
 import gym
 from mani_skill2.utils.wrappers.sb3 import ContinuousTaskWrapper, SuccessInfoWrapper
 from mani_skill2.utils.wrappers import RecordEpisode
-from utils import *
 
 
 @dataclass
@@ -59,7 +58,6 @@ class CallbackParams:
     save_freq: int = 100_000
 
 
-
 def make_env(env_id: str, max_episode_steps: int = None, record_dir: str = None,
              obs_mode: str = "state", control_mode: str = "pd_ee_delta_pose",
              reward_mode: str = "dense"):
@@ -91,7 +89,6 @@ def make_vec_env(env_id, num_envs, obs_mode, reward_mode, control_mode, max_epis
                                               reward_mode=reward_mode) for _ in range(num_envs)]))
 
 
-
 def eval_model(model, env_params, log_dir):
     # make a new one that saves to a different directory
     eval_env = SubprocVecEnv(
@@ -111,9 +108,59 @@ def eval_model(model, env_params, log_dir):
     print(f"Episode Lengths: {ep_lens}")
 
 
+def prepare_model(env, learner_params, training_params, log_dir):
+    model = PPO("MlpPolicy", env,
+                policy_kwargs=learner_params.policy_kwargs,
+                verbose=1,
+                n_steps=training_params.rollout_steps // training_params.num_envs,
+                batch_size=training_params.batch_size,
+                n_epochs=training_params.n_epochs,
+                tensorboard_log=f"{log_dir}",
+                gamma=0.85,
+                target_kl=0.05
+                )
+
+    return model
+
+
+def create_if_not_exists(path):
+    import os
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+
+def prepare_callbacks(env_params, training_params,
+                      callback_params, log_dir):
+    eval_env = SubprocVecEnv([make_env(**asdict(env_params),
+                                       record_dir=f"{log_dir}/videos") for _ in range(1)])
+    # attach this so SB3 can log reward metrics
+    eval_env = VecMonitor(eval_env)
+    eval_env.seed(training_params.seed)
+    eval_env.reset()
+
+    # periodically eval and save the best model, and also videos
+    eval_callback = EvalCallback(eval_env, best_model_save_path=f"{log_dir}",
+                                 log_path=f"{log_dir}", eval_freq=callback_params.save_freq // training_params.num_envs,
+                                 deterministic=True, render=False)
+
+    # periodically save models and current training progress
+    checkpoint_callback = CheckpointCallback(
+        save_freq=callback_params.save_freq // training_params.num_envs,
+        save_path=f"{log_dir}",
+        name_prefix="rl_model",
+        save_replay_buffer=True,
+        save_vecnormalize=True,
+    )
+    return [eval_callback, checkpoint_callback]
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--pretrained', action='store_true',
                     help='Use pretrained model')
+parser.add_argument('--seed', type=int, default=0,
+                    help='Random seed')
+parser.add_argument('--env_id', type=str, default="LiftCube-v0",
+                    help='Environment ID')
 args = parser.parse_args()
 
 
@@ -121,6 +168,9 @@ if __name__ == "__main__":
     start = time()
 
     env_params = EnvParams()
+    env_params.env_id = args.env_id
+    env_params.seed = args.seed
+    print(f"Training on {env_params.env_id} with seed {env_params.seed}")
     training_params = TrainingParams()
     learner_params = LearnerParams()
     callback_params = CallbackParams()
