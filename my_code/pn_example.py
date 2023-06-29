@@ -100,14 +100,13 @@ class EnvParams:
 class TrainingParams:
     rollout_steps: int = 3200  # how many steps to run to collect buffer
     # data before updating the policy (i.e. buffer size for on-policy PPO)
-    # num_envs: int = 24
-    num_envs: int = 3
+    num_envs: int = 24
     seed: int = 0
     batch_size: int = 400  # minibatch size for each update taken from
     # the buffer
-    n_epochs: int = 5  # no. of inner epochs through the buffer
+    n_epochs: int = 15  # no. of inner epochs through the buffer
     # to optimize the PPO loss
-    total_timesteps: int = 160_000  # total number of steps to run
+    total_timesteps: int = 1_000_000  # total number of steps to run
 
 
 @dataclass
@@ -233,9 +232,9 @@ if __name__ == "__main__":
 
     env_params = EnvParams()
     env_params.env_id = args.env_id
-    env_params.seed = args.seed
     print(f"Training on {env_params.env_id} with seed {env_params.seed}")
     training_params = TrainingParams()
+    training_params.seed = args.seed
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
