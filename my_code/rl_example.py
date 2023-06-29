@@ -169,12 +169,12 @@ if __name__ == "__main__":
 
     env_params = EnvParams()
     env_params.env_id = args.env_id
-    print(f"Training on {env_params.env_id} with seed {env_params.seed}")
     training_params = TrainingParams()
     training_params.seed = args.seed
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
+    print(f"Training on {env_params.env_id} with seed {training_params.seed}")
     env = make_vec_env(
         **asdict(env_params),
         num_envs=training_params.num_envs,

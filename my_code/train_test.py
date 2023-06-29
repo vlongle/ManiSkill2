@@ -12,19 +12,17 @@ import subprocess
 import torch
 import os
 
-trainer_files = ["pn_example.py",
-                 "rl_example.py",
-                 "rbgd_example.py"]
+trainer_files = ["pn_example.py",]
 
-# trainer_files = ["toy1.py",
-#                  "toy2.py",]
 
-# env_ids = ["ENV1", "ENV2", "ENV3", "ENV4"]
-seeds = [0, 1, 2, 3]
+seeds = [0, 1]
+env_ids = ["LiftCube-v0"]
+
 
 commands = []
 
 num_gpus = torch.cuda.device_count()
+print("num_gpus", num_gpus)
 
 for env_id in env_ids:
     for trainer_file in trainer_files:
@@ -36,9 +34,9 @@ for env_id in env_ids:
             cmd = f"python {trainer_file} --env_id {env_id} --seed {seed}"
             commands.append((cmd, gpu_id))  # Also store the GPU id
 
-            commands.append(cmd)
-
-
+# from pprint import pprint
+# print("commands", len(commands))
+# pprint(commands)
 max_concurrent_cmds = 8
 
 
@@ -48,9 +46,6 @@ max_concurrent_cmds = 8
 #     process = subprocess.Popen(cmd, shell=True)
 #     process.communicate()
 
-
-# NOTE: https://github.com/haosulab/ManiSkill2/issues/73
-# need to unset the DISPLAY
 def run_cmd(cmd_and_gpu_id):
     cmd, gpu_id = cmd_and_gpu_id
     my_env = os.environ.copy()
