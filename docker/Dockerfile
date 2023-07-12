@@ -40,4 +40,12 @@ SHELL ["/bin/bash", "-c"]
 COPY nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
 COPY nvidia_layers.json /etc/vulkan/implicit_layer.d/nvidia_layers.json
 
+# https://github.com/haosulab/ManiSkill2/issues/89
+RUN pip install setuptools==65.5.0
 RUN pip install mani-skill2==0.4.2 && pip cache purge
+# torch
+RUN pip install torch==1.12.1
+#  my_code
+RUN git clone https://github.com/vlongle/ManiSkill2.git
+# change working directory
+WORKDIR /ManiSkill2/my_code
