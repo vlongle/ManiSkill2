@@ -27,7 +27,8 @@ env_ids = ["PickCube-v0"]
 # trainer_files = ["toy1.py",
 #                  "toy2.py",]
 # env_ids = ["ENV1", "ENV2"]
-seeds = [0, 1, 2, 3]
+# seeds = [0, 1, 2]
+seeds = [0]
 
 commands = []
 
