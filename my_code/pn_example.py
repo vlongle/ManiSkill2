@@ -106,7 +106,8 @@ class TrainingParams:
     # the buffer
     n_epochs: int = 15  # no. of inner epochs through the buffer
     # to optimize the PPO loss
-    total_timesteps: int = 1_000_000  # total number of steps to run
+    # total_timesteps: int = 25_000_000  # total number of steps to run
+    total_timesteps: int = 1_000 # total number of steps to run
 
 
 @dataclass

@@ -6,25 +6,34 @@ Author: Long Le (vlongle@seas.upenn.edu)
 
 Copyright (c) 2023 Long Le
 '''
+import platform
 from env_ids import env_ids
 import concurrent.futures
 import subprocess
 import torch
 import os
 
+# print out the output of nvidia-smi
+
+
+# # 19 tasks * 4 seeds * 3 obs modes = 228 exps
 trainer_files = ["pn_example.py",
                  "rl_example.py",
                  "rbgd_example.py"]
+env_ids = ["PickCube-v0"]
+# trainer_files = ["toy_example.py"]
+# trainer_files = ["toy_example.py"]
 
 # trainer_files = ["toy1.py",
 #                  "toy2.py",]
-
-# env_ids = ["ENV1", "ENV2", "ENV3", "ENV4"]
+# env_ids = ["ENV1", "ENV2"]
 seeds = [0, 1, 2, 3]
 
 commands = []
 
 num_gpus = torch.cuda.device_count()
+print("Number of GPUs:", num_gpus)
+print("gpu available", torch.cuda.is_available())
 
 for env_id in env_ids:
     for trainer_file in trainer_files:
@@ -39,7 +48,7 @@ for env_id in env_ids:
             commands.append(cmd)
 
 
-max_concurrent_cmds = 8
+max_concurrent_cmds = 2 * 2 * 2  # cluster: 6 exps per GPU. (4 GPUs).
 
 
 # # Function to run a command
@@ -48,14 +57,15 @@ max_concurrent_cmds = 8
 #     process = subprocess.Popen(cmd, shell=True)
 #     process.communicate()
 
-
 # NOTE: https://github.com/haosulab/ManiSkill2/issues/73
 # need to unset the DISPLAY
+
 def run_cmd(cmd_and_gpu_id):
     cmd, gpu_id = cmd_and_gpu_id
     my_env = os.environ.copy()
     my_env['CUDA_VISIBLE_DEVICES'] = str(gpu_id)
-    print(f"Running command: {cmd} on GPU {gpu_id}")
+    print(f"Node {platform.node()}: Running command: {cmd} on GPU {gpu_id}")
+    # wait for the print to finish before running the command
     process = subprocess.Popen(cmd, shell=True, env=my_env)
     process.communicate()
 

@@ -201,7 +201,7 @@ class EnvParams:
 @dataclass
 class TrainingParams:
     rollout_steps: int = 3200  # how many steps to run to collect buffer
-    # data before updating the policy (i.e. buffer size for on-policy PPO)
+# data before updating the policy (i.e. buffer size for on-policy PPO)
     num_envs: int = 24
     # num_envs: int = 3
     seed: int = 0
@@ -209,7 +209,8 @@ class TrainingParams:
     # the buffer
     n_epochs: int = 15  # no. of inner epochs through the buffer
     # to optimize the PPO loss
-    total_timesteps: int = 1_000_000  # total number of steps to run
+    # total_timesteps: int = 25_000_000  # total number of steps to run
+    total_timesteps: int = 1_000  # total number of steps to run
 
 
 @dataclass
@@ -340,7 +341,7 @@ if __name__ == "__main__":
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
-    print(f"Training on {env_params.env_id} with seed {env_params.seed}")
+    print(f"Training on {env_params.env_id} with seed {training_params.seed}")
     env = make_vec_env(
         env_id=env_params.env_id,
         num_envs=training_params.num_envs,

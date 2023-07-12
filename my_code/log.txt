@@ -1,0 +1,2 @@
+/usr/bin/bash: line 1: vulkaninfo: command not found
+srun: error: enough-oryx.grasp.maas: task 0: Exited with exit code 127
