@@ -46,6 +46,6 @@ RUN pip install mani-skill2==0.4.2 && pip cache purge
 # torch
 RUN pip install torch==1.12.1
 #  my_code
-RUN git clone https://github.com/vlongle/ManiSkill2.git
+RUN git clone https://github.com/vlongle/ManiSkill2.git && cd /ManiSkill2/ && git checkout f6059aac6bcf526b50cc174f0aa9f9b8820dcebe
 # change working directory
 WORKDIR /ManiSkill2/my_code

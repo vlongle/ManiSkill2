@@ -1,4 +1,5 @@
 #!/bin/bash
+rm lnle+mani_skill2+latest.sqsh &&
 srun --partition=eaton-compute\
   --qos=ee-med\
   --gpus=1\
