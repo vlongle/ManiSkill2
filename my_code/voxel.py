@@ -40,6 +40,7 @@ class VoxelFeatureExtractor(nn.Module):
     and at the end, obtain one feature vector for each voxel
     by maxpooling all the pointwise features in the voxel.
     """
+
     def __init__(self, max_points, in_channels, out_channels):
         super(VoxelFeatureExtractor, self).__init__()
 
@@ -80,10 +81,11 @@ class VoxelNet(nn.Module):
 
     def forward(self, x):
         '''
-        x: [N, max_points, in_channels]
+        x: [N, max_points_per_voxel, in_channels]
         N: no. of voxels
+        in_channels: (x, y, z) + ancillary info such as color
         '''
-        x = self.vfe(x) # 4D tensor [C, D', H', W']
+        x = self.vfe(x)  # 4D tensor [C, D', H', W']
         x = self.conv3d(x)
         x = x.view(x.size(0), -1)
         x = self.linear(x)
