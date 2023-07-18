@@ -20,7 +20,8 @@ import os
 trainer_files = ["pn_example.py",
                  "rl_example.py",
                  "rbgd_example.py"]
-env_ids = ["PickCube-v0"]
+# env_ids = ["PickCube-v0"]
+# env_ids = ["PickCube-v0", "StackCube-v0"]
 # trainer_files = ["toy_example.py"]
 # trainer_files = ["toy_example.py"]
 
@@ -46,10 +47,8 @@ for env_id in env_ids:
             cmd = f"python {trainer_file} --env_id {env_id} --seed {seed}"
             commands.append((cmd, gpu_id))  # Also store the GPU id
 
-            commands.append(cmd)
-
-
-max_concurrent_cmds = 2 * 2 * 2  # cluster: 6 exps per GPU. (4 GPUs).
+num_cmds_per_gpu = 2
+max_concurrent_cmds = num_cmds_per_gpu * num_gpus
 
 
 # # Function to run a command

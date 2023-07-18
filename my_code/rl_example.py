@@ -8,6 +8,7 @@ Copyright (c) 2023 Long Le
 '''
 
 
+import os
 import numpy as np
 from stable_baselines3.common.evaluation import evaluate_policy
 import argparse
@@ -45,7 +46,8 @@ class TrainingParams:
     n_epochs: int = 15  # no. of inner epochs through the buffer
     # to optimize the PPO loss
     # total_timesteps: int = 25_000_000  # total number of steps to run
-    total_timesteps: int = 1_000  # total number of steps to run
+    # total_timesteps: int = 1_000  # total number of steps to run
+    total_timesteps: int = 200_000  # total number of steps to run
 
 
 @dataclass
@@ -125,7 +127,6 @@ def prepare_model(env, learner_params, training_params, log_dir):
 
 
 def create_if_not_exists(path):
-    import os
     if not os.path.exists(path):
         os.makedirs(path)
 
@@ -176,6 +177,16 @@ if __name__ == "__main__":
     callback_params = CallbackParams()
 
     print(f"Training on {env_params.env_id} with seed {training_params.seed}")
+    log_dir = f"logs/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
+    create_if_not_exists(log_dir)
+    print("log dir:", log_dir)
+    # check if latest_model.zip exists, if yes, then skip training
+    if os.path.exists(f"{log_dir}/latest_model.zip"):
+        print("Skipping training as latest_model.zip exists")
+        exit()
+    else:
+        print("Training from scratch")
+
     env = make_vec_env(
         **asdict(env_params),
         num_envs=training_params.num_envs,
@@ -184,9 +195,6 @@ if __name__ == "__main__":
     set_random_seed(training_params.seed)  # set SB3's global seed to 0
     env.seed(training_params.seed)
     env.reset()
-
-    log_dir = f"logs/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
-    create_if_not_exists(log_dir)
 
     callbacks = prepare_callbacks(env_params, training_params,
                                   callback_params, log_dir)
