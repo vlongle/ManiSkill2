@@ -13,7 +13,6 @@ import gym
 from tqdm.notebook import tqdm
 import numpy as np
 import mani_skill2.envs
-import matplotlib.pyplot as plt
 from mani_skill2.utils.common import flatten_dict_space_keys, flatten_state_dict
 import gym.spaces as spaces
 from mani_skill2.vector.vec_env import VecEnvObservationWrapper

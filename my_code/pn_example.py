@@ -28,7 +28,6 @@ import gym
 import gym.spaces as spaces
 from tqdm.notebook import tqdm
 import numpy as np
-import matplotlib.pyplot as plt
 import torch.nn as nn
 import torch as th
 from mani_skill2.vector.vec_env import VecEnvObservationWrapper
