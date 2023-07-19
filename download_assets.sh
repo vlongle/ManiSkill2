@@ -7,6 +7,6 @@ srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqs
  --time=72:00:00\
  --qos=ee-med\
  --partition=eaton-compute \
-bash -c "cd .. && ls"
+bash -c "python -m mani_skill2.utils.download_asset all --non-interactive"
 
 exit 3
