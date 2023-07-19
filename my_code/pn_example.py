@@ -16,7 +16,11 @@ Author: Long Le (vlongle@seas.upenn.edu)
 Copyright (c) 2023 Long Le
 '''
 
-
+"""
+NOTE: TODO:
+Some of these tasks are also bugged out. See:
+https://github.com/haosulab/ManiSkill2/issues/88
+"""
 
 
 import os
@@ -156,7 +160,7 @@ def prepare_callbacks(env_params, training_params,
                       callback_params, log_dir):
     env_fn = partial(
         make_env,
-        env_params.env_id,
+        **asdict(env_params),
         record_dir=f"{log_dir}/videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])
@@ -201,7 +205,6 @@ def eval_model(model, env_params, log_dir):
     env_fn = partial(
         make_env,
         **asdict(env_params),
-        env_params.env_id,
         record_dir=f"{log_dir}/eval_videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])

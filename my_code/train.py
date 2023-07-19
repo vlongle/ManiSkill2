@@ -18,7 +18,7 @@ import os
 
 # # 19 tasks * 4 seeds * 3 obs modes = 228 exps
 trainer_files = ["rl_example.py",
-                "pn_example.py",
+                 "pn_example.py",
                  "rbgd_example.py"]
 # env_ids = ["PickCube-v0"]
 # env_ids = ["PickCube-v0", "StackCube-v0"]
@@ -33,6 +33,8 @@ seeds = [0]
 
 commands = []
 
+total_timesteps = 1000000
+
 num_gpus = torch.cuda.device_count()
 print("Number of GPUs:", num_gpus)
 print("gpu available", torch.cuda.is_available())
@@ -44,7 +46,7 @@ for env_id in env_ids:
             # distribute GPUs to each command
             gpu_id = len(commands) % num_gpus
             # cmd = f"CUDA_VISIBLE_DEVICES={gpu_id} python {trainer_file} --env_id {env_id} --seed {seed}"
-            cmd = f"python {trainer_file} --env_id {env_id} --seed {seed}"
+            cmd = f"python {trainer_file} --env_id {env_id} --seed {seed} --total_timesteps {total_timesteps}"
             commands.append((cmd, gpu_id))  # Also store the GPU id
 
 num_cmds_per_gpu = 2

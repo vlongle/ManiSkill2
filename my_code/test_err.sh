@@ -1,1 +1,1 @@
-python rl_example.py --seed 0 --env_id PushChair-v1 --total_timesteps 40000 --log_dir test_onev1_logs
+python rbgd_example.py --seed 0 --env_id PushChair-v1 --total_timesteps 4000 --log_dir test_onev1_logs

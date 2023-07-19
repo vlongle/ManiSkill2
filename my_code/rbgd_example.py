@@ -7,6 +7,15 @@ Author: Long Le (vlongle@seas.upenn.edu)
 Copyright (c) 2023 Long Le
 '''
 
+"""
+NOTE: TODO:
+Some of these tasks are also bugged out. See:
+https://github.com/haosulab/ManiSkill2/issues/88
+"""
+
+
+
+
 import gym
 import gym.spaces as spaces
 from tqdm.notebook import tqdm
@@ -20,8 +29,6 @@ from mani_skill2.utils.common import flatten_dict_space_keys, flatten_state_dict
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 from mani_skill2.vector.wrappers.sb3 import SB3VecEnvWrapper
 from functools import partial
-
-
 from mani_skill2.vector import VecEnv, make as make_vec_env
 from mani_skill2.utils.common import flatten_dict_space_keys, flatten_state_dict
 from mani_skill2.vector.vec_env import VecEnvObservationWrapper
@@ -40,13 +47,10 @@ from dataclasses import asdict
 import gym
 from mani_skill2.utils.wrappers.sb3 import ContinuousTaskWrapper, SuccessInfoWrapper
 from mani_skill2.utils.wrappers import RecordEpisode
-
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 import torch.nn as nn
 import torch as th
 import mani_skill2.envs
-
-
 class CustomExtractor(BaseFeaturesExtractor):
     def __init__(self, observation_space: gym.spaces.Dict):
         super().__init__(observation_space, features_dim=1)
@@ -243,7 +247,7 @@ def make_env(env_id: str, max_episode_steps=None, record_dir: str = None,
     # For evaluation, we record videos
     if record_dir is not None:
         env = SuccessInfoWrapper(env)
-        env = RecordEpisode(env, record_dir, 
+        env = RecordEpisode(env, record_dir,
                             # save_trajectory=False,
                             info_on_video=True, render_mode="cameras")
     return env
@@ -258,7 +262,7 @@ def prepare_callbacks(env_params, training_params,
                       callback_params, log_dir):
     env_fn = partial(
         make_env,
-        env_params.env_id,
+        **asdict(env_params),
         record_dir=f"{log_dir}/videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])
@@ -361,17 +365,12 @@ if __name__ == "__main__":
               "defaulting to base_pd_joint_vel_arm_pd_ee_delta_pose")
         env_params.control_mode = "base_pd_joint_vel_arm_pd_ee_delta_pose"
 
-
-
     # check if latest_model.zip exists, if yes, then skip training
     if os.path.exists(f"{log_dir}/latest_model.zip"):
         print("Skipping training as latest_model.zip exists")
         exit()
     else:
         print("Training from scratch")
-    
-
-
 
     env = make_vec_env(
         env_id=env_params.env_id,
