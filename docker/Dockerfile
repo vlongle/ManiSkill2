@@ -50,9 +50,12 @@ ARG USER=vlongle
 ARG REPO=ManiSkill2
 ARG BRANCH=main
 ARG GIT_HOME=/ManiSkill2
-ADD https://api.github.com/repos/$USER/$REPO/git/refs/heads/$BRANCH version.json
 RUN git clone -b $BRANCH https://github.com/$USER/$REPO.git $GIT_HOME/
-#  TODO: a bit annoying to redownload data everytime maybe use data volume instead
 # RUN cd /ManiSkill2/my_code && python -m mani_skill2.utils.download_asset all --non-interactive
+#  TODO: a bit annoying to redownload data everytime maybe use data volume instead
+# should probably do git clone (cached), download data (cached) 
+# and then ADD and git pull (uncached to get the latest stuff)
 # change working directory
+ADD https://api.github.com/repos/$USER/$REPO/git/refs/heads/$BRANCH version.json
+RUN cd ${GIT_HOME} && git pull
 WORKDIR /ManiSkill2/my_code
