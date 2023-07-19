@@ -102,7 +102,8 @@ def eval_model(model, env_params, log_dir):
     eval_env.reset()
 
     returns, ep_lens = evaluate_policy(
-        model, eval_env, deterministic=True, render=False, return_episode_rewards=True, n_eval_episodes=10)
+        model, eval_env, deterministic=True, render=False, return_episode_rewards=True, 
+        n_eval_episodes=10)
     # episode length < max_episode_steps means we solved the task before time ran out
     dummy_env = make_env(env_params.env_id)()
     success = np.array(ep_lens) < dummy_env.spec.max_episode_steps
@@ -143,7 +144,8 @@ def prepare_callbacks(env_params, training_params,
     # periodically eval and save the best model, and also videos
     eval_callback = EvalCallback(eval_env, best_model_save_path=f"{log_dir}",
                                  log_path=f"{log_dir}", eval_freq=callback_params.save_freq // training_params.num_envs,
-                                 deterministic=True, render=False)
+                                 deterministic=True, render=False,
+                                 n_eval_episodes=10)
 
     # periodically save models and current training progress
     checkpoint_callback = CheckpointCallback(
@@ -163,6 +165,10 @@ parser.add_argument('--seed', type=int, default=0,
                     help='Random seed')
 parser.add_argument('--env_id', type=str, default="LiftCube-v0",
                     help='Environment ID')
+parser.add_argument('--total_timesteps', type=int, default=400_000,
+                    help='Total timesteps')
+parser.add_argument('--log_dir', type=str, default="logs",
+                    help='Log directory')
 args = parser.parse_args()
 
 
@@ -173,11 +179,12 @@ if __name__ == "__main__":
     env_params.env_id = args.env_id
     training_params = TrainingParams()
     training_params.seed = args.seed
+    training_params.total_timesteps = args.total_timesteps
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
     print(f"Training on {env_params.env_id} with seed {training_params.seed}")
-    log_dir = f"logs/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
+    log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)
     print("log dir:", log_dir)
     # check if latest_model.zip exists, if yes, then skip training

@@ -141,7 +141,8 @@ def make_env(env_id: str, max_episode_steps=None, record_dir: str = None,
     # For evaluation, we record videos
     if record_dir is not None:
         env = SuccessInfoWrapper(env)
-        env = RecordEpisode(env, record_dir, save_trajectory=False,
+        env = RecordEpisode(env, record_dir,
+                            # save_trajectory=False,
                             info_on_video=True, render_mode="cameras")
     return env
 
@@ -227,6 +228,10 @@ parser.add_argument('--seed', type=int, default=0,
                     help='Random seed')
 parser.add_argument('--env_id', type=str, default="LiftCube-v0",
                     help='Environment ID')
+parser.add_argument('--total_timesteps', type=int, default=400_000,
+                    help='Total timesteps')
+parser.add_argument('--log_dir', type=str, default="logs",
+                    help='Log directory')
 args = parser.parse_args()
 
 if __name__ == "__main__":
@@ -236,12 +241,13 @@ if __name__ == "__main__":
     env_params.env_id = args.env_id
     training_params = TrainingParams()
     training_params.seed = args.seed
+    training_params.total_timesteps = args.total_timesteps
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
     print(f"Training on {env_params.env_id} with seed {training_params.seed}")
 
-    log_dir = f"logs/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
+    log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)
     print("log dir:", log_dir)
     # check if latest_model.zip exists, if yes, then skip training
@@ -266,7 +272,6 @@ if __name__ == "__main__":
     env = ManiSkillRPointCloudVecEnvWrapper(env)
     env = SB3VecEnvWrapper(env)
     env = VecMonitor(env)
-
     set_random_seed(training_params.seed)  # set SB3's global seed to 0
     env.seed(training_params.seed)
     env.reset()
