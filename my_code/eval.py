@@ -25,7 +25,6 @@ Also, the separate eval loop doubles the horizon
 #     # success_rate = data["successes"].mean()
 #     # return success_rate
 
-
 def load_eval(folder):
     """
     folder/eval_videos/**.json
