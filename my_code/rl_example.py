@@ -24,6 +24,7 @@ from dataclasses import asdict
 import gym
 from mani_skill2.utils.wrappers.sb3 import ContinuousTaskWrapper, SuccessInfoWrapper
 from mani_skill2.utils.wrappers import RecordEpisode
+import mani_skill2.envs
 
 
 @dataclass
@@ -66,7 +67,6 @@ def make_env(env_id: str, max_episode_steps: int = None, record_dir: str = None,
              reward_mode: str = "dense"):
     def _init() -> gym.Env:
         # NOTE: Import envs here so that they are registered with gym in subprocesses
-        import mani_skill2.envs
         env = gym.make(env_id, obs_mode=obs_mode,
                        reward_mode=reward_mode, control_mode=control_mode,)
         # For training, we regard the task as a continuous task with infinite horizon.
@@ -95,17 +95,19 @@ def make_vec_env(env_id, num_envs, obs_mode, reward_mode, control_mode, max_epis
 def eval_model(model, env_params, log_dir):
     # make a new one that saves to a different directory
     eval_env = SubprocVecEnv(
-        [make_env(env_params.env_id, record_dir=f"{log_dir}/eval_videos") for i in range(1)])
+        [make_env(**asdict(env_params),
+                  record_dir=f"{log_dir}/eval_videos",
+                  ) for i in range(1)])
     # attach this so SB3 can log reward metrics
     eval_env = VecMonitor(eval_env)
     eval_env.seed(1)
     eval_env.reset()
 
     returns, ep_lens = evaluate_policy(
-        model, eval_env, deterministic=True, render=False, return_episode_rewards=True, 
+        model, eval_env, deterministic=True, render=False, return_episode_rewards=True,
         n_eval_episodes=10)
     # episode length < max_episode_steps means we solved the task before time ran out
-    dummy_env = make_env(env_params.env_id)()
+    dummy_env = make_env(**asdict(env_params))()
     success = np.array(ep_lens) < dummy_env.spec.max_episode_steps
     success_rate = success.mean()
     print(f"Success Rate: {success_rate}")
@@ -187,6 +189,15 @@ if __name__ == "__main__":
     log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)
     print("log dir:", log_dir)
+    # if control mode is not supported for this env, then default to "base_pd_joint_vel_arm_pd_ee_delta_pose"
+    try:
+        dummy_env = make_env(
+            env_params.env_id, control_mode=env_params.control_mode)()
+    except:
+        print(f"{env_params.control_mode} is not supported for {env_params.env_id}"
+              "defaulting to base_pd_joint_vel_arm_pd_ee_delta_pose")
+        env_params.control_mode = "base_pd_joint_vel_arm_pd_ee_delta_pose"
+
     # check if latest_model.zip exists, if yes, then skip training
     if os.path.exists(f"{log_dir}/latest_model.zip"):
         print("Skipping training as latest_model.zip exists")
@@ -217,6 +228,7 @@ if __name__ == "__main__":
 
         model.save(f"{log_dir}/latest_model")
 
+    print(env_params.control_mode)
     eval_model(model, env_params, log_dir)
     end = time()
 

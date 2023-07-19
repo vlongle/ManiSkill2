@@ -44,6 +44,7 @@ from mani_skill2.utils.wrappers import RecordEpisode
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 import torch.nn as nn
 import torch as th
+import mani_skill2.envs
 
 
 class CustomExtractor(BaseFeaturesExtractor):
@@ -301,7 +302,7 @@ def eval_model(model, env_params, log_dir):
     # make a new one that saves to a different directory
     env_fn = partial(
         make_env,
-        env_params.env_id,
+        **asdict(env_params),
         record_dir=f"{log_dir}/eval_videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])
@@ -315,7 +316,7 @@ def eval_model(model, env_params, log_dir):
     returns, ep_lens = evaluate_policy(
         model, eval_env, deterministic=True, render=False, return_episode_rewards=True, n_eval_episodes=10)
     # episode length < max_episode_steps means we solved the task before time ran out
-    dummy_env = make_env(env_params.env_id)
+    dummy_env = make_env(**asdict(env_params))
     success = np.array(ep_lens) < dummy_env.spec.max_episode_steps
     success_rate = success.mean()
     print(f"Success Rate: {success_rate}")
@@ -352,12 +353,26 @@ if __name__ == "__main__":
     log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)
     print("log dir:", log_dir)
+    try:
+        dummy_env = make_env(
+            env_params.env_id, control_mode=env_params.control_mode)()
+    except:
+        print(f"{env_params.control_mode} is not supported for {env_params.env_id}"
+              "defaulting to base_pd_joint_vel_arm_pd_ee_delta_pose")
+        env_params.control_mode = "base_pd_joint_vel_arm_pd_ee_delta_pose"
+
+
+
     # check if latest_model.zip exists, if yes, then skip training
     if os.path.exists(f"{log_dir}/latest_model.zip"):
         print("Skipping training as latest_model.zip exists")
         exit()
     else:
         print("Training from scratch")
+    
+
+
+
     env = make_vec_env(
         env_id=env_params.env_id,
         num_envs=training_params.num_envs,
