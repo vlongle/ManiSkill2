@@ -7,6 +7,6 @@ srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqs
  --time=72:00:00\
  --qos=ee-med\
  --partition=eaton-compute \
-bash -c "unset DISPLAY && python train.py / 2>&1 | tee log.txt"
+bash -c "python rl_example.py --seed 0 --env_id LiftCube-v0 --total_timesteps 4000 --log_dir test_onev1_logs"
 
 exit 3
