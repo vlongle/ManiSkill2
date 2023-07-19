@@ -45,7 +45,14 @@ RUN pip install setuptools==65.5.0
 RUN pip install mani-skill2==0.4.2 && pip cache purge
 # torch
 RUN pip install torch==1.12.1
-#  my_code
-RUN git clone https://github.com/vlongle/ManiSkill2.git && cd /ManiSkill2/ && git checkout f6059aac6bcf526b50cc174f0aa9f9b8820dcebe
+# https://stackoverflow.com/questions/36996046/how-to-prevent-dockerfile-caching-git-clone/39278224#39278224
+ARG USER=vlongle
+ARG REPO=ManiSkill2
+ARG BRANCH=main
+ARG GIT_HOME=/ManiSkill2
+ADD https://api.github.com/repos/$USER/$REPO/git/refs/heads/$BRANCH version.json
+RUN git clone -b $BRANCH https://github.com/$USER/$REPO.git $GIT_HOME/
+#  TODO: a bit annoying to redownload data everytime maybe use data volume instead
+# RUN cd /ManiSkill2/my_code && python -m mani_skill2.utils.download_asset all --non-interactive
 # change working directory
 WORKDIR /ManiSkill2/my_code
