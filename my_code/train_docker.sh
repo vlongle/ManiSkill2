@@ -1,5 +1,6 @@
 #!/bin/bash
 srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqsh\
+ --mounts=/home/vlongle/code/ManiSkill2/:/ManiSkill2/my_code\
  --gpus=1\
  --nodes=1\
  --cpus-per-gpu=24\
@@ -7,6 +8,6 @@ srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqs
  --time=72:00:00\
  --qos=ee-med\
  --partition=eaton-compute \
-bash -c "cd .. && ls"
+bash test_err.sh
 
 exit 3
