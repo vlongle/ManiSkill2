@@ -17,8 +17,8 @@ import os
 
 
 # # 19 tasks * 4 seeds * 3 obs modes = 228 exps
-trainer_files = ["pn_example.py",
-                 "rl_example.py",
+trainer_files = ["rl_example.py",
+                "pn_example.py",
                  "rbgd_example.py"]
 # env_ids = ["PickCube-v0"]
 # env_ids = ["PickCube-v0", "StackCube-v0"]

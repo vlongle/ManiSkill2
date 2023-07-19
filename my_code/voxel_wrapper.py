@@ -4,6 +4,8 @@ import open3d as o3d
 
 
 # http://www.open3d.org/docs/latest/tutorial/Advanced/voxelization.html
+# https://towardsdatascience.com/how-to-automate-voxel-modelling-of-3d-point-cloud-with-python-459f4d43a227
+# https://www.kaggle.com/code/gzuidhof/reference-model
 class ManiSkillVoxelWrapper(gym.ObservationWrapper):
     def __init__(self, env, voxel_size):
         super().__init__(env)
@@ -14,6 +16,10 @@ class ManiSkillVoxelWrapper(gym.ObservationWrapper):
         return voxels
 
     def point_cloud_to_voxel(self, point_cloud):
+        """
+        NOTE: actually not completely understanding this.
+        Might just have to use create_from_point_cloud_within_bounds
+        """
         pcd = o3d.geometry.PointCloud()
         pcd.points = o3d.utility.Vector3dVector(point_cloud)
         voxel_grid = o3d.geometry.VoxelGrid.create_from_point_cloud(pcd, voxel_size=self.voxel_size)
@@ -31,4 +37,8 @@ class ManiSkillVoxelWrapper(gym.ObservationWrapper):
             voxels[tuple(index)] = 1
 
         return voxels
-    
+
+
+if __name__ == "__main__":
+
+    env = ManiSkillVoxelWrapper(env)
