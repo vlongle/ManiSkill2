@@ -352,14 +352,14 @@ if __name__ == "__main__":
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
-    print(f"Training on {env_params.env_id} with seed {training_params.seed}")
+    print(f"Training on {env_params.env_id} with seed {training_params.seed} mode {env_params.obs_mode}")
 
     log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)
     print("log dir:", log_dir)
     try:
         dummy_env = make_env(
-            env_params.env_id, control_mode=env_params.control_mode)()
+            env_params.env_id, control_mode=env_params.control_mode)
     except:
         print(f"{env_params.control_mode} is not supported for {env_params.env_id}"
               "defaulting to base_pd_joint_vel_arm_pd_ee_delta_pose")

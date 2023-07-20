@@ -28,7 +28,6 @@ import gym
 import gym.spaces as spaces
 from tqdm.notebook import tqdm
 import numpy as np
-import matplotlib.pyplot as plt
 import torch.nn as nn
 import torch as th
 from mani_skill2.vector.vec_env import VecEnvObservationWrapper
@@ -257,7 +256,7 @@ if __name__ == "__main__":
 
     try:
         dummy_env = make_env(
-            env_params.env_id, control_mode=env_params.control_mode)()
+            env_params.env_id, control_mode=env_params.control_mode)
     except:
         print(f"{env_params.control_mode} is not supported for {env_params.env_id}"
               "defaulting to base_pd_joint_vel_arm_pd_ee_delta_pose")
