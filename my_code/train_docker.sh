@@ -1,6 +1,6 @@
 #!/bin/bash
 srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqsh\
- --mounts=/home/vlongle/code/ManiSkill2/:/ManiSkill2/my_code\
+ --container-mounts=/home/vlongle/code/ManiSkill2/my_code:/ManiSkill2/my_code\
  --gpus=1\
  --nodes=1\
  --cpus-per-gpu=24\
