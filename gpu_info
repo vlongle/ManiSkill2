@@ -1,0 +1,234 @@
+NodeName=dj-2080ti-0.grasp.maas Arch=x86_64 CoresPerSocket=16 
+   CPUAlloc=52 CPUEfctv=64 CPUTot=64 CPULoad=77.04
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:8
+   NodeAddr=dj-2080ti-0.grasp.maas NodeHostName=dj-2080ti-0.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 11:43:13 UTC 2023 
+   RealMemory=244698 AllocMem=138240 FreeMem=3306 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,dineshj-compute 
+   BootTime=2023-07-17T19:33:05 SlurmdStartTime=2023-07-17T19:33:34
+   LastBusyTime=2023-07-17T20:10:28
+   CfgTRES=cpu=64,mem=244698M,billing=64,gres/gpu=8
+   AllocTRES=cpu=52,mem=135G,gres/gpu=8
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=dj-a40-0.grasp.maas Arch=x86_64 CoresPerSocket=16 
+   CPUAlloc=36 CPUEfctv=64 CPUTot=64 CPULoad=37.55
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:7
+   NodeAddr=dj-a40-0.grasp.maas NodeHostName=dj-a40-0.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=244705 AllocMem=160768 FreeMem=77305 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,dineshj-compute 
+   BootTime=2023-07-13T17:01:17 SlurmdStartTime=2023-07-16T23:52:08
+   LastBusyTime=2023-07-17T20:10:28
+   CfgTRES=cpu=64,mem=244705M,billing=64,gres/gpu=7
+   AllocTRES=cpu=36,mem=157G,gres/gpu=7
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=ee-3090-0.grasp.maas Arch=x86_64 CoresPerSocket=64 
+   CPUAlloc=32 CPUEfctv=256 CPUTot=256 CPULoad=27.14
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:4
+   NodeAddr=ee-3090-0.grasp.maas NodeHostName=ee-3090-0.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=489989 AllocMem=200704 FreeMem=307829 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,eaton-compute 
+   BootTime=2023-07-10T18:07:37 SlurmdStartTime=2023-07-10T19:04:13
+   LastBusyTime=2023-07-17T20:10:26
+   CfgTRES=cpu=256,mem=489989M,billing=256,gres/gpu=4
+   AllocTRES=cpu=32,mem=196G,gres/gpu=4
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=ee-3090-1.grasp.maas Arch=x86_64 CoresPerSocket=16 
+   CPUAlloc=28 CPUEfctv=64 CPUTot=64 CPULoad=26.98
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:3
+   NodeAddr=ee-3090-1.grasp.maas NodeHostName=ee-3090-1.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=490042 AllocMem=167936 FreeMem=330447 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute,eaton-compute 
+   BootTime=2023-07-17T20:09:10 SlurmdStartTime=2023-07-17T20:09:45
+   LastBusyTime=2023-07-19T00:58:50
+   CfgTRES=cpu=64,mem=490042M,billing=64,gres/gpu=3
+   AllocTRES=cpu=28,mem=164G,gres/gpu=3
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=ee-a6000-0.grasp.maas Arch=x86_64 CoresPerSocket=64 
+   CPUAlloc=8 CPUEfctv=256 CPUTot=256 CPULoad=13.47
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:1
+   NodeAddr=ee-a6000-0.grasp.maas NodeHostName=ee-a6000-0.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=489985 AllocMem=12288 FreeMem=374842 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,eaton-compute 
+   BootTime=2023-07-10T18:07:16 SlurmdStartTime=2023-07-10T19:04:13
+   LastBusyTime=2023-07-20T19:03:54
+   CfgTRES=cpu=256,mem=489985M,billing=256,gres/gpu=1
+   AllocTRES=cpu=8,mem=12G,gres/gpu=1
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=ee-a6000-1.grasp.maas Arch=x86_64 CoresPerSocket=64 
+   CPUAlloc=48 CPUEfctv=256 CPUTot=256 CPULoad=33.47
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:6
+   NodeAddr=ee-a6000-1.grasp.maas NodeHostName=ee-a6000-1.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=489985 AllocMem=376832 FreeMem=313589 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,eaton-compute 
+   BootTime=2023-07-20T19:39:49 SlurmdStartTime=2023-07-20T19:40:42
+   LastBusyTime=2023-07-20T19:58:00
+   CfgTRES=cpu=256,mem=489985M,billing=256,gres/gpu=6
+   AllocTRES=cpu=48,mem=368G,gres/gpu=6
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=enough-oryx.grasp.maas Arch=x86_64 CoresPerSocket=64 
+   CPUAlloc=64 CPUEfctv=256 CPUTot=256 CPULoad=45.43
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:6
+   NodeAddr=enough-oryx.grasp.maas NodeHostName=enough-oryx.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=489985 AllocMem=446464 FreeMem=253835 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,eaton-compute 
+   BootTime=2023-07-17T15:55:38 SlurmdStartTime=2023-07-17T15:56:32
+   LastBusyTime=2023-07-20T16:08:18
+   CfgTRES=cpu=256,mem=489985M,billing=256,gres/gpu=6
+   AllocTRES=cpu=64,mem=436G,gres/gpu=6
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=kd-2080ti-1.grasp.maas CoresPerSocket=20 
+   CPUAlloc=0 CPUEfctv=40 CPUTot=40 CPULoad=N/A
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:4
+   NodeAddr=kd-2080ti-1.grasp.maas NodeHostName=kd-2080ti-1.grasp.maas 
+   RealMemory=91274 AllocMem=0 FreeMem=N/A Sockets=1 Boards=1
+   State=DOWN+DRAIN+NOT_RESPONDING ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute 
+   BootTime=None SlurmdStartTime=None
+   LastBusyTime=2023-07-17T20:10:26
+   CfgTRES=cpu=40,mem=91274M,billing=40,gres/gpu=4
+   AllocTRES=
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+   Reason=PDU [root@2023-07-10T14:08:14]
+
+NodeName=kd-2080ti-2.grasp.maas Arch=x86_64 CoresPerSocket=20 
+   CPUAlloc=32 CPUEfctv=40 CPUTot=40 CPULoad=31.00
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:4
+   NodeAddr=kd-2080ti-2.grasp.maas NodeHostName=kd-2080ti-2.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 
+   RealMemory=91274 AllocMem=90112 FreeMem=8168 Sockets=1 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute 
+   BootTime=2023-07-10T18:42:22 SlurmdStartTime=2023-07-10T19:04:01
+   LastBusyTime=2023-07-20T16:03:07
+   CfgTRES=cpu=40,mem=91274M,billing=40,gres/gpu=4
+   AllocTRES=cpu=32,mem=88G,gres/gpu=4
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=kd-2080ti-3.grasp.maas Arch=x86_64 CoresPerSocket=20 
+   CPUAlloc=22 CPUEfctv=40 CPUTot=40 CPULoad=18.70
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:4
+   NodeAddr=kd-2080ti-3.grasp.maas NodeHostName=kd-2080ti-3.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 
+   RealMemory=91274 AllocMem=90112 FreeMem=23809 Sockets=1 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute 
+   BootTime=2023-07-10T18:43:30 SlurmdStartTime=2023-07-10T19:04:01
+   LastBusyTime=2023-07-20T03:24:22
+   CfgTRES=cpu=40,mem=91274M,billing=40,gres/gpu=4
+   AllocTRES=cpu=22,mem=88G,gres/gpu=3
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=kd-2080ti-4.grasp.maas Arch=x86_64 CoresPerSocket=20 
+   CPUAlloc=24 CPUEfctv=40 CPUTot=40 CPULoad=24.10
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:4
+   NodeAddr=kd-2080ti-4.grasp.maas NodeHostName=kd-2080ti-4.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-60-generic #66-Ubuntu SMP Fri Jan 20 14:29:49 UTC 2023 
+   RealMemory=91274 AllocMem=90112 FreeMem=1383 Sockets=1 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute,matni-compute 
+   BootTime=2023-07-10T18:43:33 SlurmdStartTime=2023-07-10T19:04:01
+   LastBusyTime=2023-07-19T22:01:06
+   CfgTRES=cpu=40,mem=91274M,billing=40,gres/gpu=4
+   AllocTRES=cpu=24,mem=88G,gres/gpu=4
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=kd-a40-0.grasp.maas Arch=x86_64 CoresPerSocket=64 
+   CPUAlloc=56 CPUEfctv=256 CPUTot=256 CPULoad=36.26
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:8
+   NodeAddr=kd-a40-0.grasp.maas NodeHostName=kd-a40-0.grasp.maas Version=22.05.7
+   OS=Linux 5.15.0-76-generic #83-Ubuntu SMP Thu Jun 15 19:16:32 UTC 2023 
+   RealMemory=489988 AllocMem=270336 FreeMem=55998 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,kostas-compute 
+   BootTime=2023-07-10T18:46:55 SlurmdStartTime=2023-07-10T19:04:13
+   LastBusyTime=2023-07-17T20:10:28
+   CfgTRES=cpu=256,mem=489988M,billing=256,gres/gpu=8
+   AllocTRES=cpu=56,mem=264G,gres/gpu=8
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+
+NodeName=mp-2080ti-0.grasp.maas CoresPerSocket=24 
+   CPUAlloc=0 CPUEfctv=96 CPUTot=96 CPULoad=N/A
+   AvailableFeatures=(null)
+   ActiveFeatures=(null)
+   Gres=gpu:2
+   NodeAddr=mp-2080ti-0.grasp.maas NodeHostName=mp-2080ti-0.grasp.maas 
+   RealMemory=515824 AllocMem=0 FreeMem=N/A Sockets=2 Boards=1
+   State=DOWN+NOT_RESPONDING ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=batch,posa-compute 
+   BootTime=None SlurmdStartTime=None
+   LastBusyTime=2023-07-17T20:10:26
+   CfgTRES=cpu=96,mem=515824M,billing=96,gres/gpu=2
+   AllocTRES=
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/s ExtSensorsWatts=0 ExtSensorsTemp=n/s
+   Reason=Need for Project [root@2023-04-27T15:40:47]
+

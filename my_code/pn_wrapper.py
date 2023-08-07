@@ -26,7 +26,11 @@ import torch as th
 # https://github.com/charlesq34/pointnet/issues/12#issuecomment-308684441
 
 
-MAX_POINTCLOUD_SIZE = 1024
+# NOTE: https://arxiv.org/pdf/2302.04659.pdf
+# use 1200 point clouds (plus some other tricks like including 50 green points around goal position)
+# https://www.chenbao.tech/dexart/static/paper/dexart.pdf
+# use 6k point clouds per object, using tricks like "imagined points"
+MAX_POINTCLOUD_SIZE = 1200
 
 
 class ManiSkillPointCloudWrapper(gym.ObservationWrapper):

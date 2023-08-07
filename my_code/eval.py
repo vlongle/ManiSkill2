@@ -68,4 +68,4 @@ def load_all_evals(log_dir):
 # print(load_eval("test_onev1_logs/LiftCube-v0/rgbd/seed_0"))
 # print(load_eval("test_onev1_logs/PushChair-v1/state/seed_0"))
 # print(load_all_evals("test_one_logs"))
-print(load_all_evals("logs"))
+print(load_all_evals("test_one_change_hparams_logs"))

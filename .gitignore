@@ -37,7 +37,7 @@ imgui.ini
 # but can be excluded explicitly
 tmp/
 *data/
-demos/
+*demos/
 
 # docker image
 **.sqsh

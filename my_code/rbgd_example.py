@@ -16,6 +16,7 @@ https://github.com/haosulab/ManiSkill2/issues/88
 
 
 
+from copy import deepcopy
 import gym
 import gym.spaces as spaces
 from tqdm.notebook import tqdm
@@ -212,7 +213,7 @@ class TrainingParams:
     seed: int = 0
     batch_size: int = 400  # minibatch size for each update taken from
     # the buffer
-    n_epochs: int = 15  # no. of inner epochs through the buffer
+    n_epochs: int = 5 # no. of inner epochs through the buffer
     # to optimize the PPO loss
     # total_timesteps: int = 25_000_000  # total number of steps to run
     # total_timesteps: int = 1_000  # total number of steps to run
@@ -227,7 +228,7 @@ class LearnerParams:
 
 @dataclass
 class CallbackParams:
-    save_freq: int = 32_000
+    save_freq: int = 100_000
 
 # define an SB3 style make_env function for evaluation
 
@@ -260,9 +261,11 @@ def create_if_not_exists(path):
 
 def prepare_callbacks(env_params, training_params,
                       callback_params, log_dir):
+    new_env_params = deepcopy(env_params)
+    new_env_params.max_episode_steps = None  # not using
     env_fn = partial(
         make_env,
-        **asdict(env_params),
+        **asdict(new_env_params),
         record_dir=f"{log_dir}/videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])
@@ -304,9 +307,12 @@ def prepare_model(env, learner_params, training_params, log_dir):
 
 def eval_model(model, env_params, log_dir):
     # make a new one that saves to a different directory
+    new_env_params = deepcopy(env_params)
+    new_env_params.max_episode_steps = None  # not using
+
     env_fn = partial(
         make_env,
-        **asdict(env_params),
+        **asdict(new_env_params),
         record_dir=f"{log_dir}/eval_videos",)
 
     eval_env = SubprocVecEnv([env_fn for i in range(1)])
@@ -352,7 +358,8 @@ if __name__ == "__main__":
     learner_params = LearnerParams()
     callback_params = CallbackParams()
 
-    print(f"Training on {env_params.env_id} with seed {training_params.seed} mode {env_params.obs_mode}")
+    print(
+        f"Training on {env_params.env_id} with seed {training_params.seed} mode {env_params.obs_mode}")
 
     log_dir = f"{args.log_dir}/{env_params.env_id}/{env_params.obs_mode}/seed_{training_params.seed}"
     create_if_not_exists(log_dir)

@@ -8,6 +8,6 @@ srun --container-image=/home/vlongle/code/ManiSkill2/lnle+mani_skill2+latest.sqs
  --time=72:00:00\
  --qos=ee-med\
  --partition=eaton-compute \
-bash -c "python train.py"
+bash -c "python eval.py"
 
 exit 3

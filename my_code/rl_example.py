@@ -8,6 +8,7 @@ Copyright (c) 2023 Long Le
 '''
 
 
+from copy import deepcopy
 import os
 import numpy as np
 from stable_baselines3.common.evaluation import evaluate_policy
@@ -38,11 +39,15 @@ class EnvParams:
 
 @dataclass
 class TrainingParams:
-    rollout_steps: int = 3200  # how many steps to run to collect buffer
-    # data before updating the policy (i.e. buffer size for on-policy PPO)
+    # rollout_steps: int = 3200  # how many steps to run to collect buffer
+    # # data before updating the policy (i.e. buffer size for on-policy PPO)
+    # n_steps: int = 400  # SEE: https://github.com/haosulab/ManiSkill2/issues/118
+    # n_steps: int = 400  # SEE: https://github.com/haosulab/ManiSkill2/issues/118
+    n_steps: int = 133  # SEE: https://github.com/haosulab/ManiSkill2/issues/118
     num_envs: int = 24
     seed: int = 0
     batch_size: int = 400  # minibatch size for each update taken from
+    # batch_size: int = 1000  # minibatch size for each update taken from
     # the buffer
     n_epochs: int = 15  # no. of inner epochs through the buffer
     # to optimize the PPO loss
@@ -94,13 +99,16 @@ def make_vec_env(env_id, num_envs, obs_mode, reward_mode, control_mode, max_epis
 
 def eval_model(model, env_params, log_dir):
     # make a new one that saves to a different directory
+    new_env_params = deepcopy(env_params)
+    new_env_params.max_episode_steps = None  # not using
+    # # continuousTaskWrapper
     eval_env = SubprocVecEnv(
-        [make_env(**asdict(env_params),
+        [make_env(**asdict(new_env_params),
                   record_dir=f"{log_dir}/eval_videos",
                   ) for i in range(1)])
     # attach this so SB3 can log reward metrics
     eval_env = VecMonitor(eval_env)
-    eval_env.seed(1)
+    eval_env.seed(422)
     eval_env.reset()
 
     returns, ep_lens = evaluate_policy(
@@ -118,12 +126,17 @@ def prepare_model(env, learner_params, training_params, log_dir):
     model = PPO("MlpPolicy", env,
                 policy_kwargs=learner_params.policy_kwargs,
                 verbose=1,
-                n_steps=training_params.rollout_steps // training_params.num_envs,
+                # n_steps=training_params.rollout_steps // training_params.num_envs,
+                n_steps=training_params.n_steps,
                 batch_size=training_params.batch_size,
                 n_epochs=training_params.n_epochs,
                 tensorboard_log=f"{log_dir}",
-                gamma=0.85,
-                target_kl=0.05
+                # NOTE: gamma=0.85, kl=0.05 doesn't work for 400_000
+                # pickCube state.
+                # gamma=0.85,
+                # target_kl=0.05,
+                gamma=0.8,
+                target_kl=0.2,
                 )
 
     return model
@@ -136,7 +149,10 @@ def create_if_not_exists(path):
 
 def prepare_callbacks(env_params, training_params,
                       callback_params, log_dir):
-    eval_env = SubprocVecEnv([make_env(**asdict(env_params),
+    new_env_params = deepcopy(env_params)
+    new_env_params.max_episode_steps = None  # not using
+    # # continuousTaskWrapper
+    eval_env = SubprocVecEnv([make_env(**asdict(new_env_params),
                                        record_dir=f"{log_dir}/videos") for _ in range(1)])
     # attach this so SB3 can log reward metrics
     eval_env = VecMonitor(eval_env)
@@ -199,7 +215,7 @@ if __name__ == "__main__":
         env_params.control_mode = "base_pd_joint_vel_arm_pd_ee_delta_pose"
 
     # check if latest_model.zip exists, if yes, then skip training
-    if os.path.exists(f"{log_dir}/latest_model.zip"):
+    if os.path.exists(f"{log_dir}/latest_model.zip") and not args.pretrained:
         print("Skipping training as latest_model.zip exists")
         exit()
     else:

@@ -23,6 +23,12 @@ https://github.com/haosulab/ManiSkill2/issues/88
 """
 
 
+# NOTE: TODO: HACK: log_dir between pn and voxels
+# might overlap bc obs_mode="pointcloud"
+
+
+# NOTE: TODO: HACK: this might be bugged out...
+
 import os
 import gym
 import gym.spaces as spaces
