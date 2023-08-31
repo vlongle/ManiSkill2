@@ -7,7 +7,8 @@ Author: Long Le (vlongle@seas.upenn.edu)
 Copyright (c) 2023 Long Le
 '''
 import platform
-from env_ids import env_ids
+# from env_ids import env_ids
+from reduced_env_ids import env_ids
 import concurrent.futures
 import subprocess
 import torch
@@ -49,7 +50,7 @@ for env_id in env_ids:
             cmd = f"python {trainer_file} --env_id {env_id} --seed {seed} --total_timesteps {total_timesteps}"
             commands.append((cmd, gpu_id))  # Also store the GPU id
 
-num_cmds_per_gpu = 2
+num_cmds_per_gpu = 1
 max_concurrent_cmds = num_cmds_per_gpu * num_gpus
 
 
