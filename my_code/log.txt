@@ -1,156 +1,73 @@
-Number of GPUs: 2
+Number of GPUs: 1
 gpu available True
-[2023-07-20 06:36:35.409] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:35.409] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:35.517] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:35.517] [svulkan2] [warning] Continue without GLFW.
-Training on PickCube-v0 with seed 0
-log dir: logs/PickCube-v0/state/seed_0
+[2023-08-07 15:47:47.695] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
+[2023-08-07 15:47:47.695] [svulkan2] [warning] Continue without GLFW.
+Training on LiftCube-v0 with seed 0 mode rgbd
+log dir: test_one_change_arch_v0_logs/LiftCube-v0/rgbd/seed_0
 Training from scratch
-Training on PickCube-v0 with seed 0
-log dir: logs/PickCube-v0/pointcloud/seed_0
-Skipping training as latest_model.zip exists
-[2023-07-20 06:36:39.207] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.207] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.306] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.306] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.338] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.338] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.436] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.436] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.446] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.446] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.448] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.448] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.455] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.455] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.459] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.459] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.525] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.525] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.552] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.552] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.600] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.601] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.640] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.640] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.656] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.657] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.663] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.663] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.696] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.696] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.715] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.715] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.729] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.729] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.729] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.729] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.733] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.733] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.744] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.744] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.770] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.770] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.783] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.783] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.792] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.792] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:39.940] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:39.940] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:40.342] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:40.342] [svulkan2] [warning] Continue without GLFW.
-Training on PickCube-v0 with seed 0 mode rgbd
-log dir: logs/PickCube-v0/rgbd/seed_0
-Training from scratch
-[2023-07-20 06:36:44.126] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:44.126] [svulkan2] [warning] Continue without GLFW.
-[2023-07-20 06:36:44.457] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
-[2023-07-20 06:36:44.457] [svulkan2] [warning] Continue without GLFW.
-/home/vlongle/miniconda3/envs/mani_skill2/lib/python3.9/site-packages/stable_baselines3/ppo/ppo.py:151: UserWarning: You have specified a mini-batch size of 400, but because the `RolloutBuffer` is of size `n_steps * n_envs = 3192`, after every 7 untruncated mini-batches, there will be a truncated mini-batch of size 392
-We recommend using a `batch_size` that is a factor of `n_steps * n_envs`.
-Info: (n_steps=133 and n_envs=24)
-  warnings.warn(
-[2023-07-20 06:36:45.402] [svulkan2] [warning] Only 1 renderer is allowed per process. All previously created renderer resources are now invalid
-[32m2023-07-20 06:36:45,685 - mani_skill2 - INFO - RenderServer is running at: localhost:36685[0m
+[2023-08-07 15:47:50.972] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
+[2023-08-07 15:47:50.972] [svulkan2] [warning] Continue without GLFW.
+[2023-08-07 15:47:52.366] [svulkan2] [warning] Only 1 renderer is allowed per process. All previously created renderer resources are now invalid
+[32m2023-08-07 15:47:52,617 - mani_skill2 - INFO - RenderServer is running at: localhost:51007[0m
+[2023-08-07 15:48:02.627] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
+[2023-08-07 15:48:02.627] [svulkan2] [warning] Continue without GLFW.
+[33;1m2023-08-07 15:48:04,046 - mani_skill2 - WARNING - mani_skill2 is not installed with git.[0m
 Using cuda device
 Training from scratch
-Logging to logs/PickCube-v0/state/seed_0/PPO_5
+Logging to test_one_change_arch_v0_logs/LiftCube-v0/rgbd/seed_0/PPO_1
 ----------------------------------
 | rollout/           |           |
 |    ep_len_mean     | 100       |
-|    ep_rew_mean     | 17.460558 |
+|    ep_rew_mean     | 18.301851 |
 | time/              |           |
-|    fps             | 1308      |
+|    fps             | 433       |
 |    iterations      | 1         |
-|    time_elapsed    | 2         |
+|    time_elapsed    | 7         |
 |    total_timesteps | 3192      |
 ----------------------------------
------------------------------------------
-| rollout/                |             |
-|    ep_len_mean          | 100         |
-|    ep_rew_mean          | 18.545347   |
-| time/                   |             |
-|    fps                  | 1504        |
-|    iterations           | 2           |
-|    time_elapsed         | 4           |
-|    total_timesteps      | 6384        |
-| train/                  |             |
-|    approx_kl            | 0.012507677 |
-|    clip_fraction        | 0.163       |
-|    clip_range           | 0.2         |
-|    entropy_loss         | -9.91       |
-|    explained_variance   | -0.101      |
-|    learning_rate        | 0.0003      |
-|    loss                 | 0.0702      |
-|    n_updates            | 15          |
-|    policy_gradient_loss | -0.0206     |
-|    std                  | 0.994       |
-|    value_loss           | 0.286       |
------------------------------------------
 ----------------------------------------
 | rollout/                |            |
 |    ep_len_mean          | 100        |
-|    ep_rew_mean          | 20.19346   |
+|    ep_rew_mean          | 18.468542  |
 | time/                   |            |
-|    fps                  | 1680       |
-|    iterations           | 3          |
-|    time_elapsed         | 5          |
-|    total_timesteps      | 9576       |
+|    fps                  | 361        |
+|    iterations           | 2          |
+|    time_elapsed         | 17         |
+|    total_timesteps      | 6384       |
 | train/                  |            |
-|    approx_kl            | 0.01536158 |
-|    clip_fraction        | 0.165      |
+|    approx_kl            | 0.01103119 |
+|    clip_fraction        | 0.125      |
 |    clip_range           | 0.2        |
-|    entropy_loss         | -9.9       |
-|    explained_variance   | 0.345      |
+|    entropy_loss         | -9.93      |
+|    explained_variance   | -0.122     |
 |    learning_rate        | 0.0003     |
-|    loss                 | 0.127      |
-|    n_updates            | 30         |
-|    policy_gradient_loss | -0.0202    |
-|    std                  | 0.995      |
-|    value_loss           | 0.409      |
+|    loss                 | 0.0852     |
+|    n_updates            | 5          |
+|    policy_gradient_loss | -0.0115    |
+|    std                  | 0.998      |
+|    value_loss           | 0.93       |
 ----------------------------------------
 ----------------------------------------
 | rollout/                |            |
 |    ep_len_mean          | 100        |
-|    ep_rew_mean          | 25.941423  |
+|    ep_rew_mean          | 19.245562  |
 | time/                   |            |
 |    fps                  | 1792       |
 |    iterations           | 4          |
 |    time_elapsed         | 7          |
 |    total_timesteps      | 12768      |
 | train/                  |            |
-|    approx_kl            | 0.01827131 |
-|    clip_fraction        | 0.196      |
+|    approx_kl            | 0.00975045 |
+|    clip_fraction        | 0.116      |
 |    clip_range           | 0.2        |
-|    entropy_loss         | -9.86      |
-|    explained_variance   | 0.392      |
+|    entropy_loss         | -9.92      |
+|    explained_variance   | 0.444      |
 |    learning_rate        | 0.0003     |
-|    loss                 | 0.118      |
-|    n_updates            | 45         |
-|    policy_gradient_loss | -0.0267    |
-|    std                  | 0.986      |
-|    value_loss           | 0.348      |
+|    loss                 | 0.0503     |
+|    n_updates            | 10         |
+|    policy_gradient_loss | -0.0118    |
+|    std                  | 0.998      |
+|    value_loss           | 0.226      |
 ----------------------------------------
 [2023-07-20 06:36:54.494] [svulkan2] [error] GLFW error: X11: The DISPLAY environment variable is missing
 [2023-07-20 06:36:54.494] [svulkan2] [warning] Continue without GLFW.

@@ -18,9 +18,14 @@ import os
 
 
 # # 19 tasks * 4 seeds * 3 obs modes = 228 exps
-trainer_files = ["rl_example.py",
-                 "pn_example.py",
-                 "rbgd_example.py"]
+# trainer_files = ["rl_example.py",
+#                  "pn_example.py",
+#                  "rbgd_example.py"]
+# trainer_files = ["rl_example.py",]
+# trainer_files = ["rbgd_example.py",]
+trainer_files = ["pn_example.py",]
+#  "pn_example.py",
+#  "rbgd_example.py"]
 # env_ids = ["PickCube-v0"]
 # env_ids = ["PickCube-v0", "StackCube-v0"]
 # trainer_files = ["toy_example.py"]
@@ -30,11 +35,17 @@ trainer_files = ["rl_example.py",
 #                  "toy2.py",]
 # env_ids = ["ENV1", "ENV2"]
 # seeds = [0, 1, 2]
+env_ids = ["LiftCube-v0"]
 seeds = [0]
 
 commands = []
 
-total_timesteps = 1000000
+# total_timesteps = 1000000
+total_timesteps = 400_000
+# log_dir = "test_one_logs"
+log_dir = "test_one_change_arch_v0_logs"
+pretrained = False
+
 
 num_gpus = torch.cuda.device_count()
 print("Number of GPUs:", num_gpus)
@@ -47,7 +58,9 @@ for env_id in env_ids:
             # distribute GPUs to each command
             gpu_id = len(commands) % num_gpus
             # cmd = f"CUDA_VISIBLE_DEVICES={gpu_id} python {trainer_file} --env_id {env_id} --seed {seed}"
-            cmd = f"python {trainer_file} --env_id {env_id} --seed {seed} --total_timesteps {total_timesteps}"
+            cmd = f"python {trainer_file} --env_id {env_id} --seed {seed} --total_timesteps {total_timesteps} --log_dir {log_dir}"
+            if pretrained:
+                cmd += " --pretrained"
             commands.append((cmd, gpu_id))  # Also store the GPU id
 
 num_cmds_per_gpu = 1
@@ -68,7 +81,7 @@ def run_cmd(cmd_and_gpu_id):
     my_env = os.environ.copy()
     my_env['CUDA_VISIBLE_DEVICES'] = str(gpu_id)
     print(f"Node {platform.node()}: Running command: {cmd} on GPU {gpu_id}")
-    # wait for the print to finish before running the command
+    # # wait for the print to finish before running the command
     process = subprocess.Popen(cmd, shell=True, env=my_env)
     process.communicate()
 
